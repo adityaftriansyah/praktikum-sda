@@ -386,7 +386,7 @@ int main() {
 
         else if (pilih == 10) {
             quickSort(data, 0, n - 1);
-                cout << "Data berhasil diurutkan dengan Quick Sort (No Kereta)\n";
+                cout << "Data berhasil diurutkan dengan Quick Sort \n";
                 cout << "\nTekan ENTER untuk kembali ke menu...";
                 cin.ignore();
                 cin.get();

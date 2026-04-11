@@ -1,27 +1,41 @@
 #include <iostream>
 using namespace std;
 
-int findMin(int A[], int n, int &index) {
-    int minVal = A[0];
-    index = 0;
+// fungsi untuk mencari nilai minimum
+int cariMin(int arr[], int n, int &posisi) {
+    int min = arr[0];
+    posisi = 0;
+
     for (int i = 1; i < n; i++) {
-        if (A[i] < minVal) {
-            minVal = A[i];
-            index = i;
+        if (arr[i] < min) {
+            min = arr[i];
+            posisi = i;
         }
     }
-    return minVal;
+
+    return min;
 }
 
 int main() {
-    int fibo[] = {1, 1, 2, 3, 5, 8, 13, 21};
-    int n = 8;
-    int minIdx;
+    int n;
 
-    int minVal = findMin(fibo, n, minIdx);
+    cout << "=== Program Mencari Nilai Minimum ===" << endl;
+    cout << "Masukkan jumlah data: ";
+    cin >> n;
 
-    cout << "Nilai Minimum: " << minVal << endl;
-    cout << "Terdapat pada Indeks: " << minIdx << endl;
+    int data[n]; // array sesuai jumlah input user
+
+    cout << "Masukkan " << n << " angka:" << endl;
+    for (int i = 0; i < n; i++) {
+        cout << "Data ke-" << i << " : ";
+        cin >> data[i];
+    }
+
+    int indexMin;
+    int hasil = cariMin(data, n, indexMin);
+
+    cout << "\nNilai minimum = " << hasil << endl;
+    cout << "Terdapat pada index = " << indexMin << endl;
 
     return 0;
 }
