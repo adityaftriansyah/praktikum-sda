@@ -208,81 +208,6 @@ void mergeSort(Kereta *arr, int l, int r) {
     }
 }
 
-int partition(Kereta *arr, int low, int high) {
-    int pivot = (arr + high)->no;
-    int i = low - 1;
-
-    for (int j = low; j < high; j++) {
-        if ((arr + j)->no < pivot) {
-            i++;
-            swapKereta(arr + i, arr + j);
-        }
-    }
-
-    swapKereta(arr + i + 1, arr + high);
-    return i + 1;
-}
-
-void quickSort(Kereta *arr, int low, int high) {
-    if (low < high) {
-        int pi = partition(arr, low, high);
-
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
-    }
-}
-
-int badChar[256];
-
-void badCharHeuristic(string pattern, int m) {
-    for (int i = 0; i < 256; i++)
-        badChar[i] = -1;
-
-    for (int i = 0; i < m; i++)
-        badChar[(int)pattern[i]] = i;
-}
-
-bool boyerMoore(string text, string pattern) {
-    int n = text.length();
-    int m = pattern.length();
-
-    badCharHeuristic(pattern, m);
-
-    int shift = 0;
-
-    while (shift <= (n - m)) {
-        int j = m - 1;
-
-        while (j >= 0 && pattern[j] == text[shift + j])
-            j--;
-
-        if (j < 0)
-            return true;
-        else
-            shift += max(1, j - badChar[(int)text[shift + j]]);
-    }
-
-    return false;
-}
-
-void searchNamaBM(Kereta *arr, int n, string key) {
-    bool ketemu = false;
-
-    cout << "\nProses Boyer Moore:\n";
-
-    for (int i = 0; i < n; i++) {
-        cout << "Cek data ke-" << i << endl;
-
-        if (boyerMoore((arr + i)->nama, key)) {
-            cout << ">> Ditemukan: " << (arr + i)->nama << endl;
-            ketemu = true;
-        }
-    }
-
-    if (!ketemu)
-        cout << "Tidak ditemukan\n";
-}
-
 int main() {
     Kereta data[100];
     int n = 3;
@@ -304,9 +229,7 @@ int main() {
         cout << "6. Sort Nama \n";
         cout << "7. Sort Harga \n";
         cout << "8. Lihat Riwayat\n";
-        cout << "9. Cari Nama (Boyer Moore)\n";
-        cout << "10. Quick Sort (No Kereta)\n";
-        cout << "11. Keluar\n";
+        cout << "9. Keluar\n";
         cout << "Pilih: ";
         cin >> pilih;
 
@@ -373,26 +296,6 @@ int main() {
         }  
 
         else if (pilih == 9) {
-            string key;
-               cout << "Masukkan nama kereta: ";
-               cin.ignore();
-               getline(cin, key);
-
-               searchNamaBM(data, n, key);
-
-                     cout << "\nTekan ENTER untuk kembali ke menu...";
-                     cin.get();
-        }
-
-        else if (pilih == 10) {
-            quickSort(data, 0, n - 1);
-                cout << "Data berhasil diurutkan dengan Quick Sort \n";
-                cout << "\nTekan ENTER untuk kembali ke menu...";
-                cin.ignore();
-                cin.get();
-        }
-
-        else if (pilih == 11) {
             cout << "\nTekan ENTER untuk keluar...";
                  cin.ignore();
                  cin.get();
